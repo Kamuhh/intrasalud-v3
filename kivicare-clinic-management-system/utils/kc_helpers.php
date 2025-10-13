@@ -7863,7 +7863,13 @@ add_filter('kivicare_custom_form_list', function ($response, $data) {
                     $v->conditions = json_decode($v->conditions);
                     $v->fields = json_decode($v->fields);
                     $v->name = json_decode($v->name);
-                    $v->clinic_ids = !empty($v->conditions->clinic_ids) ? collect($v->conditions->clinic_ids)->pluck('id')->toArray() : [];
+                    $v->clinic_ids = !empty($v->conditions->clinic_ids)
+                        ? collect($v->conditions->clinic_ids)
+                            ->pluck('id')
+                            ->map(function ($id) {
+                                return (int) $id;
+                            })->toArray()
+                        : [];
                     $v->appointment_status = !empty($v->conditions->appointment_status) ? collect($v->conditions->appointment_status)->pluck('id')->toArray() : [];
                     $v->show_mode = !empty($v->conditions->show_mode) ? collect($v->conditions->show_mode)->pluck('id')->toArray() : [];
                     return !empty($v->conditions->show_mode) && in_array('appointment', $v->show_mode);
@@ -7878,7 +7884,13 @@ add_filter('kivicare_custom_form_list', function ($response, $data) {
                     $v->conditions = json_decode($v->conditions);
                     $v->fields = json_decode($v->fields);
                     $v->name = json_decode($v->name);
-                    $v->clinic_ids = !empty($v->conditions->clinic_ids) ? collect($v->conditions->clinic_ids)->pluck('id')->toArray() : [];
+                    $v->clinic_ids = !empty($v->conditions->clinic_ids)
+                        ? collect($v->conditions->clinic_ids)
+                            ->pluck('id')
+                            ->map(function ($id) {
+                                return (int) $id;
+                            })->toArray()
+                        : [];
                     return true;
                 })->toArray();
             break;
