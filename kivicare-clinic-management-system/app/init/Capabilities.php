@@ -1,6 +1,6 @@
 <?php
 function kc_register_encounter_summary_capability() {
-    foreach (['administrator','kivi_doctor'] as $roleKey) {
+    foreach (['administrator','kivi_doctor','kivi_receptionist','kivi_clinic_admin'] as $roleKey) {
         if ($role = get_role($roleKey)) {
             $role->add_cap('kc_view_encounter_summary');
         }
