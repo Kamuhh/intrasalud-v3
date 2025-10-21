@@ -58,7 +58,9 @@ add_action('wp_ajax_kc_encounter_summary', function () {
     $user = wp_get_current_user();
     $can  = user_can($user, 'kc_view_encounter_summary')
         || in_array('administrator', (array) $user->roles, true)
-        || in_array('kivi_doctor',  (array) $user->roles, true);
+        || in_array('kivi_doctor',  (array) $user->roles, true)
+        || in_array('kivi_receptionist', (array) $user->roles, true)
+        || in_array('kivi_clinic_admin', (array) $user->roles, true);
 
     if ( ! $can ) wp_send_json_error(['message' => 'Permisos insuficientes'], 403);
 
